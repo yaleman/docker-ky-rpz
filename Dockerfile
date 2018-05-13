@@ -10,7 +10,7 @@ EXPOSE 53/udp
 
 # do the updates and the installs
 RUN apt-get update && apt-get -y upgrade
-RUN apt-get -y install bind9 git wget sudo
+RUN apt-get -y install bind9 git wget sudo cron
 
 # download ky-rpz
 RUN git clone https://github.com/yaleman/ky-rpz.git /opt/ky-rpz
@@ -22,7 +22,11 @@ ADD named.conf.local /etc/bind/
 ADD named.conf.options /etc/bind/
 # startup script
 ADD startup.sh /opt/
+# cron file to update the rpz config
+ADD ky-rpz-cron /etc/cron.d/ky-rpz
 
+RUN chmod +x /etc/cron.d/ky-rpz
+RUN touch /etc/cron.d/ky-rpz
 RUN chmod +x /opt/ky-rpz/ky-rpz.sh
 RUN chmod +x /opt/startup.sh
 # make this because well, we haven't installed squid and it's just easier.
