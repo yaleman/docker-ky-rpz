@@ -1,5 +1,0 @@
-# hourly runs the update
-0 * * * * root /opt/ky-rpz.sh
-
-# reloads the bind config on the half hour
-30 * * * * /usr/sbin/rndc reload
