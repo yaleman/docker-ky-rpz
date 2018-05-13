@@ -24,7 +24,7 @@ ADD named.conf.local /etc/bind/
 ADD named.conf.options /etc/bind/
 
 # startup script
-ADD startup /opt/startup
+ADD startup.sh /opt/startup
 RUN chmod +x /opt/startup
 
 # update script
